@@ -52,6 +52,8 @@ pip install -r requirements.txt
 
 3.(Optional) Run the Streamlit app locally:
 streamlit run app.py
+```
+## 📝 License
 
-📝 License
 This project is licensed under the MIT License.
+
