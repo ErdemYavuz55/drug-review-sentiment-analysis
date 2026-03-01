@@ -1,187 +1,57 @@
-# 🧠 Sentiment Analysis on Drug Reviews
+# 💊 Drug Review Sentiment Analysis using BERT
 
-### A Comparative Study of Classical Machine Learning and Transformer-Based Models
+This repository contains an end-to-end Natural Language Processing (NLP) pipeline that classifies customer reviews of various drugs into sentiment categories (Negative, Neutral, Positive) using a Fine-Tuned BERT model. 
 
----
-
-## 📌 Abstract
-
-This study investigates sentiment classification on the Drugs.com review dataset using both traditional machine learning methods and transformer-based deep learning architectures.
-
-We conduct:
-
-* Binary sentiment classification using TF-IDF and Word2Vec features with classical ML and deep neural networks.
-* Three-class sentiment classification using a fine-tuned Google Research BERT model.
-
-The objective is to analyze the representational power of sparse vs dense embeddings and compare traditional models with contextualized transformers in a real-world healthcare-related NLP task.
+## 🚀 Live Demo
+You can try the model directly in your browser without installing anything: 
+**[👉 Click here to open the Web App](https://huggingface.co/spaces/erdemyavuz/drug-sentiment-analysis)**
 
 ---
 
-## 📂 Dataset
+### 🧪 Sample Reviews for Testing
+If you want to test the model but don't have a review in mind, you can copy and paste the examples below into the application:
 
-* Source: Drugs.com Drug Review Dataset
-* User-generated drug reviews
-* Associated numerical ratings (1–10)
+**🟢 Positive Review:**
+> *"This medication completely changed my life. Within a week, all my symptoms disappeared and I experienced absolutely no side effects. Highly recommended!"*
 
-### Label Construction
+**🔴 Negative Review:**
+> *"Absolutely terrible experience. It made me feel extremely nauseous all day and didn't help with the pain at all. I had to stop taking it immediately."*
 
-Binary classification:
-
-* Positive (rating ≥ threshold)
-* Negative (rating < threshold)
-
-Three-class classification:
-
-* Negative
-* Neutral
-* Positive
-
-Text preprocessing included:
-
-* Lowercasing
-* Punctuation removal
-* Stopword filtering
-* Lemmatization
+**🟡 Mixed / Neutral Review:**
+> *"It works okay for the pain, but it makes me feel very sleepy during the day. I might ask my doctor for an alternative."*
 
 ---
 
-## 🧪 Methodology
+## 📂 Project Structure
 
-### 1️⃣ Feature Engineering (Binary Classification)
+The project is divided into four main Jupyter Notebooks, documenting the entire machine learning lifecycle:
 
-#### TF-IDF Representation
+* **`1.Data Cleaning and Preprocessing.ipynb`**: Handles the raw data from Kaggle (Drugs.com dataset). Includes HTML unescaping, lowercasing, tokenization, removing non-alphanumerics, removing stopwords, and lemmatization using NLTK/WordNet.
+* **`2.ML and DL Models.ipynb`**: Establishes baseline models including traditional Machine Learning and Deep Learning (CNN) architectures.
+* **`3.Bert Fine Tuning.ipynb`**: The core of the project. Fine-tunes the `bert-base-uncased` model for sequence classification on 3 labels (0: Negative, 1: Neutral, 2: Positive).
+* **`4.Bert Model Import - Extracting the False Predictions.ipynb`**: Focuses on error analysis by extracting and investigating the false predictions made by the BERT model to understand its limitations and improve future iterations.
 
-Sparse high-dimensional representation using term frequency-inverse document frequency weighting.
+## 🛠️ Tech Stack
+* **Language:** Python
+* **NLP & Deep Learning:** Hugging Face `transformers`, `PyTorch`, `NLTK`
+* **Machine Learning:** `scikit-learn`
+* **Data Manipulation:** `pandas`, `numpy`
+* **Web App Framework:** `Streamlit` (Deployed on Hugging Face Spaces)
 
-#### Word2Vec Embeddings
+## ⚙️ Installation & Usage
 
-Dense distributed word representations capturing semantic similarity.
+If you want to run this project locally, follow these steps:
 
----
+1. Clone the repository:
+```bash
+git clone [https://github.com/ErdemYavuz55/drug-review-sentiment-analysis.git](https://github.com/ErdemYavuz55/drug-review-sentiment-analysis.git)
+cd drug-review-sentiment-analysis
 
-### 2️⃣ Classical Machine Learning Models
+2.Install the required dependencies:
+pip install -r requirements.txt
 
-* Logistic Regression
-* Support Vector Machine (SVM)
-* Random Forest
-* Gradient Boosting
-* K-Nearest Neighbors
+3.(Optional) Run the Streamlit app locally:
+streamlit run app.py
 
-All models were evaluated using:
-
-* Accuracy
-* Precision
-* Recall
-* F1-score
-* Confusion Matrix
-
----
-
-### 3️⃣ Deep Learning Models (Binary)
-
-* Fully Connected Neural Network (TF-IDF input)
-* LSTM-based model (Word2Vec input)
-
----
-
-### 4️⃣ Transformer-Based Model (Three-Class)
-
-We fine-tuned **BERT-base-uncased** using the HuggingFace Transformers library.
-
-Architecture:
-
-* Base: 12-layer Transformer encoder
-* Hidden size: 768
-* Attention heads: 12
-* Output layer adapted for 3-class classification
-
-Training Setup:
-
-* Optimizer: AdamW
-* Loss: CrossEntropyLoss
-* Learning rate scheduling
-* Early stopping
-
----
-
-## 📊 Experimental Results
-
-### Binary Classification
-
-| Model               | Feature  | Accuracy | F1 |
-
-| Logistic Regression | TF-IDF   | 0.82     | 0.81 |
-
-| Naive Bayes         | TF-IDF   | 0.78     | 0.77 |
-
-| Random Forest       | TF-IDF   | 0.81     | 0.79 |
-
-| LSTM                | Word2Vec | 0.83     | 0.83 |
-
----
-
-### Three-Class BERT Model
-
-Fine-tuned BERT achieved:
-
-* Higher macro-F1 compared to classical models
-* Better generalization on neutral class
-* Improved semantic understanding due to contextual embeddings
-
----
-
-## 🤗 HuggingFace Model
-
-Fine-tuned model available at:
-
-```
-https://huggingface.co/erdemyavuz/drug-review-sentiment-analysis-bert
-```
-
-Inference example:
-
-```python
-from transformers import pipeline
-
-classifier = pipeline(
-    "text-classification",
-    model="erdemyavuz/drug-review-sentiment-analysis-bert"
-)
-
-classifier("This medication completely changed my life.")
-```
-
----
-
-## 🔍 Comparative Insights
-
-1. TF-IDF + Linear models perform surprisingly strong in binary classification.
-2. Word2Vec improves semantic clustering but requires deeper models to outperform TF-IDF.
-3. BERT significantly improves:
-
-   * Context modeling
-   * Neutral sentiment detection
-   * Domain-sensitive expressions
-
----
-
-## 🧠 Research Contributions
-
-* Empirical comparison of sparse vs dense representations
-* Classical ML vs Deep Learning vs Transformer benchmarking
-* Sentiment classification in healthcare domain
-* Publicly available fine-tuned transformer model
-
----
-
-## 🛠 Tech Stack
-
-* Python
-* Scikit-learn
-* TensorFlow / PyTorch
-* HuggingFace Transformers
-* Word2Vec
-* TF-IDF
-
----
-
+📝 License
+This project is licensed under the MIT License.
