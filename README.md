@@ -44,7 +44,7 @@ If you want to run this project locally, follow these steps:
 
 1. Clone the repository:
 ```bash
-git clone [https://github.com/ErdemYavuz55/drug-review-sentiment-analysis.git](https://github.com/ErdemYavuz55/drug-review-sentiment-analysis.git)
+git clone https://github.com/ErdemYavuz55/drug-review-sentiment-analysis.git
 cd drug-review-sentiment-analysis
 
 2.Install the required dependencies:
