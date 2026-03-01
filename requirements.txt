@@ -1,0 +1,21 @@
+# Temal Veri İşleme ve Analiz
+numpy
+pandas
+matplotlib
+seaborn
+
+# Makine Öğrenmesi ve Değerlendirme
+scikit-learn
+scipy
+
+# Derin Öğrenme (Deep Learning)
+torch
+tensorflow
+keras
+
+# Doğal Dil İşleme (NLP) ve BERT
+transformers
+safetensors
+
+# Yardımcı Araçlar
+tqdm
