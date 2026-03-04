@@ -38,6 +38,91 @@ The project is divided into four main Jupyter Notebooks, documenting the entire 
 * **Data Manipulation:** `pandas`, `numpy`
 * **Web App Framework:** `Streamlit` (Deployed on Hugging Face Spaces)
 
+## 📊 Evaluation Metrics
+
+Evaluation was conducted on a held-out validation set.
+
+Metrics reported:
+
+* Accuracy
+* Precision (macro)
+* Recall (macro)
+* F1-score (macro)
+* Confusion Matrix
+
+### Example
+
+| Model               | Feature  | Accuracy | F1 |
+
+| Logistic Regression | TF-IDF   | 0.82     | 0.81 |
+
+| Naive Bayes         | TF-IDF   | 0.78     | 0.77 |
+
+| Random Forest       | TF-IDF   | 0.81     | 0.79 |
+
+| LSTM                | Word2Vec | 0.83     | 0.83 |
+
+---
+
+## 🔍 Key Findings
+
+* Transformer-based contextual embeddings outperform classical TF-IDF based models in multi-class sentiment detection.
+* The neutral class benefits significantly from contextual modeling.
+* Domain-specific vocabulary (medical terminology) is better captured by BERT representations.
+
+---
+
+## 🧪 Example Inference
+
+```python
+from transformers import pipeline
+
+classifier = pipeline(
+    "text-classification",
+    model="erdemyavuz55/drug-review-sentiment-analysis-bert"
+)
+
+classifier("This medication worked great with minimal side effects.")
+```
+
+Example Output:
+
+```
+[{'label': 'POSITIVE', 'score': 0.97}]
+```
+
+---
+
+## 📈 Comparison with Classical Models
+
+In the broader study, we compared:
+
+* TF-IDF + Logistic Regression
+* TF-IDF + SVM
+* Word2Vec + LSTM
+* Random Forest
+* Gradient Boosting
+
+The fine-tuned BERT model achieved superior macro-F1 in the three-class setting.
+
+---
+
+## ⚠️ Limitations
+
+* Trained only on English reviews
+* Domain-specific slang may reduce accuracy
+* Ratings-based labeling may introduce subjectivity bias
+* No domain-adaptive pretraining performed
+
+---
+
+## 🚀 Future Work
+
+* Domain-adaptive pretraining on medical corpora
+* Model interpretability (SHAP, attention visualization)
+* Deployment as REST API
+* Cross-dataset generalization experiments
+
 ## ⚙️ Installation & Usage
 
 If you want to run this project locally, follow these steps:
